@@ -8,6 +8,10 @@ editor: visual
 
 ctrl + shift + p = command palette til fx at finde styler
 
+If you wanted to run [styler](https://github.com/r-lib/styler) on all the files, we can use:styler::style_dir() styler::style_dir()
+
+
+
 Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
 
 ## Running Code
