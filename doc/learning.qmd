@@ -8,14 +8,27 @@ format: html
 
 ```{r setup}
 #| include: false
+library(tidyverse)
+source(here::here("R/functions.R"))
+lipidomics <- read_csv(here::here("data/lipidomics.csv"))
 ```
 
 ```{r}
 # Code chunk
 ```
 
-## Poorly formatted markdown
+## Basic statistics
 
--   List item 1
--   List item 2
+*First analyses/output*
 
+For our first output, we want to calculate the mean and SD for each
+metabolite and then, to make it more readable, we want to round the
+numbers to one digit. To do this, we will use the split-apply-combine
+methodology and the across() function.
+
+```{r basic-stats}
+lipidomics |>
+  group_by(metabolite) |>
+  summarise(across(value, list(mean = mean, sd = sd))) |>
+  mutate(across(where(is.numeric), ~ round(.x, digits = 1)))
+```
