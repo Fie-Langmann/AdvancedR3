@@ -17,6 +17,7 @@ Imports:
 Encoding: UTF-8
 Title: AdvancedR3
 Suggests: 
-    gitcreds
+    gitcreds,
+    styler
 URL: https://github.com/Fie-Langmann/AdvancedR3
 BugReports: https://github.com/Fie-Langmann/AdvancedR3/issues
