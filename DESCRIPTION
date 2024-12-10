@@ -8,9 +8,11 @@ Imports:
     knitr,
     readr,
     readxl,
+    remotes,
     rmarkdown,
     snakecase,
     stringr,
-    tidyr
+    tidyr,
+    usethis
 Encoding: UTF-8
 Title: AdvancedR3
