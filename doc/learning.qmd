@@ -1,6 +1,6 @@
 ---
 title: "Draft Quarto document"
-author: "Your Name"
+author: "Fie Langmann"
 format: html
 ---
 
@@ -13,4 +13,9 @@ format: html
 ```{r}
 # Code chunk
 ```
+
+## Poorly formatted markdown
+
+-   List item 1
+-   List item 2
 
