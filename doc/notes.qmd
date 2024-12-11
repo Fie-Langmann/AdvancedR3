@@ -8,18 +8,30 @@ editor: visual
 
 ctrl + shift + p = command palette til fx at finde styler
 
-If you wanted to run [styler](https://github.com/r-lib/styler) on all the files, we can use:styler::style_dir() styler::style_dir()
+If you wanted to run [styler](https://github.com/r-lib/styler) on all
+the files, we can use:styler::style_dir() styler::style_dir()
 
+use the Palette (Ctrl-Shift-PCtrl-Shift-P, then type “style file”) to
+style the file or
 
-use the Palette (Ctrl-Shift-PCtrl-Shift-P, then type “style file”) to style the file
+```{r}
+styler:::style_active_file()
+```
 
+To check if anything has changed in the targets pipeline objects, run:
 
+```{r}
+targets::tar_outdated()
+```
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+Quarto enables you to weave together content and executable code into a
+finished document. To learn more about Quarto see <https://quarto.org>.
 
 ## Running Code
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+When you click the **Render** button a document will be generated that
+includes both content and the output of embedded code. You can embed
+code like this:
 
 ```{r}
 1 + 1
@@ -32,4 +44,5 @@ You can add options to executable code like this
 2 * 2
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+The `echo: false` option disables the printing of code (only output is
+displayed).
