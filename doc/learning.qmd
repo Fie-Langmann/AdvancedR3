@@ -29,3 +29,12 @@ methodology and the across() function.
 ```{r basic-stats}
 descriptive_stats(lipidomics)
 ```
+
+## Figure outputs
+
+```{r}
+metabolite_distribution_plot <- ggplot(lipidomics, aes(x = value)) +
+    geom_histogram() + 
+     facet_wrap(vars(metabolite), scales = "free")
+metabolite_distribution_plot
+```
