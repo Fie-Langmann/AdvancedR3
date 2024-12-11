@@ -24,6 +24,25 @@ To check if anything has changed in the targets pipeline objects, run:
 targets::tar_outdated()
 ```
 
+To remove objects in the targets folder use
+
+```{r}
+tar_delete()
+```
+
+To remove metadata in the targets folder, use
+
+```{r}
+tar_invalidate()
+```
+
+To delete the entire targets folder, e.g. if something went wrong and I
+want to rerun the entire pipeline, use
+
+```{r}
+tar_destroy()
+```
+
 Quarto enables you to weave together content and executable code into a
 finished document. To learn more about Quarto see <https://quarto.org>.
 
