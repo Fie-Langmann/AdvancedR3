@@ -7,15 +7,18 @@ Imports:
     ggplot2,
     here,
     knitr,
+    parsnip,
     readr,
     readxl,
+    recipes,
     remotes,
     rmarkdown,
     snakecase,
     stringr,
     targets,
     tidyr,
-    usethis
+    usethis,
+    workflows
 Encoding: UTF-8
 Title: AdvancedR3
 Suggests: 
