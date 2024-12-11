@@ -79,14 +79,73 @@ lipidomics_wide
 Now we will fix the differences in scales for the metabolites
 
 ```{r}
-recipe(lipidomics_wide) |>
-  update_role(metabolite_cholesterol, age, gender, new_role = "predictor") |>
-  update_role(class, new_role = "outcome") |>
-step_normalize(starts_with("metabolite_"))
-```
-
-```{r}
 recipe_specs <- lipidomics_wide |>
   create_recipe_spec(metabolite_cholesterol)
 recipe_specs
+```
+
+Next we'll create a workflow because when running multiple models (like
+we will do in the next section) that may require different data
+structures, the data transformation steps have to happen right before
+the data is fit to the model and need to be done on exactly the data
+used by the model.
+
+```{r}
+workflow() |>
+  add_model(log_reg_specs) |>
+  add_recipe(recipe_specs)
+```
+
+Instead of using the previously created objects, let’s start the model
+creation from scratch.
+
+```{r}
+model_workflow <- create_model_workflow(
+  parsnip::logistic_reg() |>
+    parsnip::set_engine("glm"),
+  lipidomics_wide |>
+    create_recipe_spec(metabolite_cholesterol)
+)
+model_workflow
+```
+
+Now, we can do the final thing: Fitting the data to the model with fit()
+
+```{r}
+fitted_model <- model_workflow |>
+  fit(lipidomics_wide)
+fitted_model
+```
+
+This gives us a lot of information, but what we are mostly interested in
+is the model estimates themselves. While this fitted_model object
+contains a lot additional information inside, workflows thankfully has a
+function to extract the information we want. In this case, it is the
+extract_fit_parsnip() function.
+
+```{r}
+fitted_model |>
+  extract_fit_parsnip() |>
+  tidy(exponentiate = TRUE) # tidier format
+```
+
+After having created a function and sourcing the R/functions.R, test it
+out with:
+
+```{r}
+fitted_model |>
+  tidy_model_output()
+```
+
+If we revise the code so it is one pipe, it would look like:
+
+```{r}
+create_model_workflow(
+  logistic_reg() |>
+    set_engine("glm"),
+  lipidomics_wide |>
+    create_recipe_spec(metabolite_cholesterol)
+) |>
+  fit(lipidomics_wide) |>
+  tidy_model_output()
 ```
