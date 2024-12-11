@@ -54,3 +54,17 @@ metabolites_to_wider <- function(data){
             names_prefix = "metabolite_"
         )
 }
+
+#' A transformation recipe to pre-process the data.
+#'
+#' @param data The lipidomics dataset.
+#' @param metabolite_variable The column of the metabolite variable.
+#'
+#' @return
+#'
+create_recipe_spec <- function(data, metabolite_variable) {
+    recipes::recipe(data) |>
+        recipes::update_role({{ metabolite_variable }}, age, gender, new_role = "predictor") |>
+        recipes::update_role(class, new_role = "outcome") |>
+        recipes::step_normalize(tidyselect::starts_with("metabolite_"))
+}

@@ -64,6 +64,10 @@ lipidomics |>
   dplyr::filter(n > 1)
 ```
 
+Since we’re using a function-oriented workflow, let’s convert both the
+“metabolite to snakecase” and “pivot to wider” code into their own
+functions in the R/functions.R file
+
 ```{r}
 lipidomics_wide <- lipidomics |>
   column_values_to_snake_case(metabolite) |>
@@ -72,6 +76,17 @@ lipidomics_wide <- lipidomics |>
 lipidomics_wide
 ```
 
-Since we’re using a function-oriented workflow, let’s convert both the
-“metabolite to snakecase” and “pivot to wider” code into their own
-functions in the R/functions.R file
+Now we will fix the differences in scales for the metabolites
+
+```{r}
+recipe(lipidomics_wide) |>
+  update_role(metabolite_cholesterol, age, gender, new_role = "predictor") |>
+  update_role(class, new_role = "outcome") |>
+step_normalize(starts_with("metabolite_"))
+```
+
+```{r}
+recipe_specs <- lipidomics_wide |>
+  create_recipe_spec(metabolite_cholesterol)
+recipe_specs
+```
