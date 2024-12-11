@@ -8,33 +8,19 @@ format: html
 
 ```{r setup}
 #| include: false
+targets::tar_config_set(store = here::here("_targets"))
 library(tidyverse)
+library(targets)
 source(here::here("R/functions.R"))
-lipidomics <- read_csv(here::here("data/lipidomics.csv"))
+lipidomics <- targets::tar_read(lipidomics)
+```
+
+## Results
+
+```{r}
+targets::tar_read(df_stats_by_metabolite)
 ```
 
 ```{r}
-# Code chunk
-```
-
-## Basic statistics
-
-*First analyses/output*
-
-For our first output, we want to calculate the mean and SD for each
-metabolite and then, to make it more readable, we want to round the
-numbers to one digit. To do this, we will use the split-apply-combine
-methodology and the across() function.
-
-```{r basic-stats}
-descriptive_stats(lipidomics)
-```
-
-## Figure outputs
-
-```{r}
-metabolite_distribution_plot <- ggplot(lipidomics, aes(x = value)) +
-    geom_histogram() + 
-     facet_wrap(vars(metabolite), scales = "free")
-metabolite_distribution_plot
+targets::tar_read(fig_metabolite_distribution)
 ```
