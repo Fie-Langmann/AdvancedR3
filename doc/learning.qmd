@@ -37,38 +37,6 @@ Working with logistic regression for this research question:
 to the controls, adjusting for the influence of age and gender?*
 
 ```{r}
-log_reg_specs <- logistic_reg() |>
-  set_engine("glm") # using general linear models
-log_reg_specs
-```
-
-We need to do some data transformation. Data is on a long format and
-there are multiple Cholesterol values, while all other metabolites only
-have one. The last issue is that each metabolite has quite large
-differences in the values and ranges of data. In our research question
-we want to know how each metabolite influences T1D. In order to best
-interpret the results and compare across metabolites, we should ideally
-have all the metabolites with a similar range and distribution of values
-
-we can tidy up the metabolite names using mutate() with
-snakecase::to_snake_case(). Secondly, to make our dataset wider, we use
-pivot_wider(). Since we also want an easy way of identifying columns
-that are metabolites, we will add a "metabolite\_" prefix using the
-argument names_prefix. To fix the multiple cholesterol issue, we will
-merge the values by calculating a mean before pivoting. We do this by
-setting the values_fn with mean.
-
-```{r}
-lipidomics |>
-  dplyr::count(code, metabolite) |>
-  dplyr::filter(n > 1)
-```
-
-Since we’re using a function-oriented workflow, let’s convert both the
-“metabolite to snakecase” and “pivot to wider” code into their own
-functions in the R/functions.R file
-
-```{r}
 lipidomics_wide <- lipidomics |>
   column_values_to_snake_case(metabolite) |>
   metabolites_to_wider()
@@ -76,71 +44,8 @@ lipidomics_wide <- lipidomics |>
 lipidomics_wide
 ```
 
-Now we will fix the differences in scales for the metabolites
-
-```{r}
-recipe_specs <- lipidomics_wide |>
-  create_recipe_spec(metabolite_cholesterol)
-recipe_specs
-```
-
-Next we'll create a workflow because when running multiple models (like
-we will do in the next section) that may require different data
-structures, the data transformation steps have to happen right before
-the data is fit to the model and need to be done on exactly the data
-used by the model.
-
-```{r}
-workflow() |>
-  add_model(log_reg_specs) |>
-  add_recipe(recipe_specs)
-```
-
-Instead of using the previously created objects, let’s start the model
-creation from scratch.
-
 ```{r}
 model_workflow <- create_model_workflow(
-  parsnip::logistic_reg() |>
-    parsnip::set_engine("glm"),
-  lipidomics_wide |>
-    create_recipe_spec(metabolite_cholesterol)
-)
-model_workflow
-```
-
-Now, we can do the final thing: Fitting the data to the model with fit()
-
-```{r}
-fitted_model <- model_workflow |>
-  fit(lipidomics_wide)
-fitted_model
-```
-
-This gives us a lot of information, but what we are mostly interested in
-is the model estimates themselves. While this fitted_model object
-contains a lot additional information inside, workflows thankfully has a
-function to extract the information we want. In this case, it is the
-extract_fit_parsnip() function.
-
-```{r}
-fitted_model |>
-  extract_fit_parsnip() |>
-  tidy(exponentiate = TRUE) # tidier format
-```
-
-After having created a function and sourcing the R/functions.R, test it
-out with:
-
-```{r}
-fitted_model |>
-  tidy_model_output()
-```
-
-If we revise the code so it is one pipe, it would look like:
-
-```{r}
-create_model_workflow(
   logistic_reg() |>
     set_engine("glm"),
   lipidomics_wide |>
@@ -148,4 +53,6 @@ create_model_workflow(
 ) |>
   fit(lipidomics_wide) |>
   tidy_model_output()
+
+model_workflow
 ```
