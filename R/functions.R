@@ -128,6 +128,12 @@ generate_model_results <- function(data) {
 }
 
 
+#' Calculating estimates for metabolites in lipidomics
+#'
+#' @param data
+#'
+#' @return Estimates from logistic regression
+#'
 calculate_estimates <- function(data) {
   data |>
     split_by_metabolite() |>
@@ -135,4 +141,3 @@ calculate_estimates <- function(data) {
     purrr::list_rbind() |>
     dplyr::filter(stringr::str_detect(term, "metabolite_"))
 }
-
