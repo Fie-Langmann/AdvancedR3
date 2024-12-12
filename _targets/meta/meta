@@ -1,14 +1,19 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|02ac6b368ba7099a|||||||||||||||
+.Random.seed|object|3763afece2fed81a|||||||||||||||
+calculate_estimates|function|95f03508afbd8c48|||||||||||||||
 column_values_to_snake_case|function|0b1d18d3f24a5435|||||||||||||||
 create_model_workflow|function|5543b567de56ef74|||||||||||||||
 create_recipe_spec|function|2ac1a3bc952df1db|||||||||||||||
 descriptive_stats|function|6c3bc7226276a599|||||||||||||||
+df_model_estimates|stem|78d6e90d9986ee30|2954b8877e0c4723|36cb77e92b20ad6b|791794764||t20069.411490735s|7b0e517ba933dba2|1037|rds|local|vector|||2.32|glm.fit algorithm did not converge. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred|
 df_stats_by_metabolite|stem|73d9b2abe55518bd|ce15a181d02b2e03|587f9f49389e78f1|519715527||t20068.3618817706s|a2f85ca40321daf5|403|rds|local|vector|||0.09||
 fig_metabolite_distribution|stem|aad928f36f59d229|86673d84fb1f96ff|1044c3c14a265949|1599393873||t20068.3722853947s|2f6af015a0652350|137191|rds|local|vector|||0.16||
 file|stem|f6bf5a5688fb274f|09442fac263aded2|2c530c1562a7fbd1|1735323524|data/lipidomics.csv|t20046.5799496574s|2ec1867e6b7db575|24313|file|local|vector|||0||
+generate_model_results|function|a9983c86025e701b|||||||||||||||
+get_estimates|stem|78d6e90d9986ee30|2954b8877e0c4723|36cb77e92b20ad6b|1110861416||t20069.410872474s|7b0e517ba933dba2|1037|rds|local|vector|||2.63|glm.fit algorithm did not converge. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred|
 lipidomics|stem|8656ce16dfb0afaf|0adf46d83f39a429|f0e124423009cc2f|-1498393010||t20068.3562802726s|5efea0df906539e6|4884|rds|local|vector|||0.22||
 metabolites_to_wider|function|23dc6d48e297076d|||||||||||||||
 plot_distributions|function|b06f65993fa8d2d0|||||||||||||||
-quarto_doc|stem|2eb1cd6c462544d2|388f14abd14602e7|db805cc7d7a79483|1582462002|doc/learning.html*doc/learning.qmd|t20069.3434214038s|7a378722dd14755e|29091|file|local|vector|||9.01||
+quarto_doc|stem|ce42cccf21734879|388f14abd14602e7|db805cc7d7a79483|1582462002|doc/learning.html*doc/learning.qmd|t20069.4110385377s|c8676ede1f98d3ba|31158|file|local|vector|||14.41||
+split_by_metabolite|function|71f99b5c1fdabdc0|||||||||||||||
 tidy_model_output|function|99603693ad824aa7|||||||||||||||
