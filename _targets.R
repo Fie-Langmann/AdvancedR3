@@ -79,7 +79,7 @@ list(
   ),
   tar_target(
       name = fig_model_estimates,
-      plot_estimates(df_model_estimates)
+      command = plot_estimates(df_model_estimates)
   )
 )
 

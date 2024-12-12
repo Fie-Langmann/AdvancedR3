@@ -56,21 +56,5 @@ model_estimates
 ### Visualizing the model estimates
 
 ```{r}
-model_estimates <- tar_read(df_model_estimates)
-plot_estimates <- model_estimates |>
-  ggplot(aes(
-    x = estimate,
-    y = metabolite,
-    xmin = estimate - std.error,
-    xmax = estimate + std.error
-  )) +
-  geom_pointrange() +
-  coord_fixed(xlim = c(0, 5))
-plot_estimates
-```
-
-*testing function*
-
-```{r}
-calculate_estimates(lipidomics) |> plot_estimates()
+tar_read(fig_model_estimates)
 ```

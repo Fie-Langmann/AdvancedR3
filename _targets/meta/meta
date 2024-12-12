@@ -1,5 +1,5 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|4fe2603d38097147|||||||||||||||
+.Random.seed|object|fdf9b3a22b12f15c|||||||||||||||
 calculate_estimates|function|95f03508afbd8c48|||||||||||||||
 column_values_to_snake_case|function|0b1d18d3f24a5435|||||||||||||||
 create_model_workflow|function|5543b567de56ef74|||||||||||||||
@@ -16,6 +16,6 @@ lipidomics|stem|8656ce16dfb0afaf|0adf46d83f39a429|f0e124423009cc2f|-1498393010||
 metabolites_to_wider|function|23dc6d48e297076d|||||||||||||||
 plot_distributions|function|b06f65993fa8d2d0|||||||||||||||
 plot_estimates|function|a77318b69d164db3|||||||||||||||
-quarto_doc|stem|95c8d22b23a461c4|e401e33e53c1f822|688004111fe45685|1582462002|doc/learning.html*doc/learning.qmd|t20069.4251527797s||29762|file|local|vector|||7.97||Error running quarto cli.ℹ Rerun with quiet  FALSE to see the full error message.Caused by error System command quarto.exe failed
+quarto_doc|stem|aca37a2b29410195|99052bf718f9cb1a|c35d05613de6ac06|1582462002|doc/learning.html*doc/learning.qmd|t20069.441850107s|052fba7c0a128dc9|30382|file|local|vector|||8.69||
 split_by_metabolite|function|71f99b5c1fdabdc0|||||||||||||||
 tidy_model_output|function|99603693ad824aa7|||||||||||||||
