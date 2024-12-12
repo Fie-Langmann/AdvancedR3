@@ -90,9 +90,9 @@ create_model_workflow <- function(model_specs, recipe_specs) {
 #' @return A data frame.
 #'
 tidy_model_output <- function(workflow_fitted_model) {
-    workflow_fitted_model |>
-        workflows::extract_fit_parsnip() |>
-        broom::tidy(exponentiate = TRUE)
+  workflow_fitted_model |>
+    workflows::extract_fit_parsnip() |>
+    broom::tidy(exponentiate = TRUE)
 }
 
 
@@ -103,10 +103,10 @@ tidy_model_output <- function(workflow_fitted_model) {
 #' @return A list of data frames.
 #'
 split_by_metabolite <- function(data) {
-    data |>
-        column_values_to_snake_case(metabolite) |>
-        dplyr::group_split(metabolite) |>
-        purrr::map(metabolites_to_wider)
+  data |>
+    column_values_to_snake_case(metabolite) |>
+    dplyr::group_split(metabolite) |>
+    purrr::map(metabolites_to_wider)
 }
 
 
@@ -117,12 +117,22 @@ split_by_metabolite <- function(data) {
 #' @return A data frame.
 #'
 generate_model_results <- function(data) {
-    create_model_workflow(
-        parsnip::logistic_reg() |>
-            parsnip::set_engine("glm"),
-        data |>
-            create_recipe_spec(tidyselect::starts_with("metabolite_"))
-    ) |>
-        parsnip::fit(data) |>
-        tidy_model_output()
+  create_model_workflow(
+    parsnip::logistic_reg() |>
+      parsnip::set_engine("glm"),
+    data |>
+      create_recipe_spec(tidyselect::starts_with("metabolite_"))
+  ) |>
+    parsnip::fit(data) |>
+    tidy_model_output()
 }
+
+
+calculate_estimates <- function(data) {
+  data |>
+    split_by_metabolite() |>
+    purrr::map(generate_model_results) |>
+    purrr::list_rbind() |>
+    dplyr::filter(stringr::str_detect(term, "metabolite_"))
+}
+

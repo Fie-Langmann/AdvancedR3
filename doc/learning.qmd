@@ -44,26 +44,14 @@ lipidomics_wide <- lipidomics |>
 lipidomics_wide
 ```
 
-```{r}
-model_workflow <- create_model_workflow(
-  logistic_reg() |>
-    set_engine("glm"),
-  lipidomics_wide |>
-    create_recipe_spec(metabolite_cholesterol)
-) |>
-  fit(lipidomics_wide) |>
-  tidy_model_output()
-
-model_workflow
-```
-
 ## Running multiple models
 
 ```{r}
 lipidomics |>
   split_by_metabolite() |>
   map(generate_model_results) |>
-  list_rbind()
+  purrr::list_rbind()|>
+  filter(stringr::str_detect(term, "metabolite_"))
 ```
 
 ```{r}
@@ -71,6 +59,6 @@ model_estimates <- lipidomics |>
   split_by_metabolite() |>
   map(generate_model_results) |>
   list_rbind() |>
-  filter(str_detect(term, "metabolite_"))
+  filter(stringr::str_detect(term, "metabolite_"))
 model_estimates
 ```
