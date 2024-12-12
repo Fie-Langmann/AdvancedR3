@@ -7,7 +7,6 @@
 library(targets)
 library(tarchetypes)
 library(quarto)
-# library(tarchetypes) # Load other packages as needed.
 
 # Set target options:
 tar_option_set(
